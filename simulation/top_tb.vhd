@@ -1,14 +1,13 @@
--- Encryption component testbench
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+-- Top-level implementation testbench
+library ieee;
+use ieee.std_logic_1164.all;
 
-entity encryption_tb is
+entity top_tb is
     --
-end encryption_tb;
+end top_tb;
 
-architecture arch of encryption_tb is
-    component encryption is
+architecture arch of top_tb is
+    component top is
         Port(
             dataIn: in std_logic_vector(7 downto 0); -- Data input (plaintext)
             keyIn: in std_logic_vector(7 downto 0); -- Key input
@@ -26,7 +25,7 @@ architecture arch of encryption_tb is
     signal clr: std_logic;
 
 begin
-    cipher: encryption port map(
+    toplevel: top port map(
         dataIn => data_in,
         keyIn => key_in,
         dataOut => data_out,
@@ -44,11 +43,6 @@ begin
 
     sim: process 
     begin
-        clr <= '1';
-        wait for clock_time;
-        clr <= '0';
-        wait for clock_time;
-
         data_in <= "01101101"; -- M
         key_in <= "01101010"; -- J
         wait for clock_time;
@@ -63,6 +57,26 @@ begin
         
         data_in <= "01100101"; -- E
         key_in <= "01101110"; -- N
+        wait for clock_time;
+
+        data_in <= "01100101"; -- E
+        key_in <= "01101010"; -- J
+        wait for clock_time;
+
+        data_in <= "01110110"; -- V
+        key_in <= "01100001"; -- A
+        wait for clock_time;
+
+        data_in <= "01100101"; -- E
+        key_in <= "01100011"; -- C
+        wait for clock_time;
+
+        data_in <= "01110010"; -- R
+        key_in <= "01110001"; -- Q
+        wait for clock_time;
+
+        data_in <= "01111001"; -- Y
+        key_in <= "01110101"; -- U
         wait for clock_time;
         wait;
     end process;

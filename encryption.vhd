@@ -16,16 +16,14 @@ architecture arch of encryption is
     signal ciphertext: integer;
 
 begin
-    process(clk, clr)
+    process(clk)
     begin
-        if(clr = '1') then
-            dataOut <= (others => '0');
-            
-        elsif(rising_edge(clk)) then
-            -- Formula: (keyIn + (25 - dataIn) mod 25)
-            ciphertext <= (to_integer(unsigned(keyIn)) + (25 - to_integer(unsigned(dataIn)))) mod 25;
-            dataOut <= std_logic_vector(to_signed(ciphertext, 8)); -- Integer to std_logic_vector
-            -- Why signed and not unsigned??
-        end if;
+        -- Formula: (keyIn + (26 - dataIn) mod 26)
+        ciphertext <= (to_integer(unsigned(keyIn)) + (26 - to_integer(unsigned(dataIn)))) mod 26;
+        report "dataIn: " & integer'image(to_integer(unsigned(dataIn)));
+        report "keyIn: " & integer'image(to_integer(unsigned(keyIn)));
+        report "ciphertext: " & integer'image(ciphertext);
+        dataOut <= std_logic_vector(to_signed(ciphertext, 8)); -- Integer to std_logic_vector
+        -- Why signed and not unsigned??
     end process;
 end arch;

@@ -1,3 +1,4 @@
+-- Encoder/decoder component testbench
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -34,6 +35,7 @@ begin
 
     sim: process 
     begin
+        -- Encode from ASCII code to offset (ex. 97 -> 0)
         data_in <= "01100001"; -- A
         wait for clock_time;
         data_in <= "01100010"; -- B
@@ -45,6 +47,12 @@ begin
         data_in <= "01100101"; -- E 
         wait for clock_time;
         data_in <= "01100110"; -- F
+        wait for clock_time;
+
+        -- Decode from offset to ASCII code (ex. 0 ->97)
+        data_in <= "00000000";
+        wait for clock_time;
+        data_in <= "00011001";
         wait;
     end process;
 end arch;
