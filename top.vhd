@@ -33,9 +33,18 @@ architecture arch of top is
         );
     end component;
 
+    -- Key encoder component
+    --component key_rom is
+        --Port(
+            --dOut: out std_logic_vector(7 downto 0);
+            --clk: in std_logic
+        --);
+    --end component;
+
     signal rom_to_cipher: std_logic_vector(7 downto 0);
     signal keyrom_to_cipher: std_logic_vector(7 downto 0);
     signal cipher_to_rom: std_logic_vector(7 downto 0);
+    --signal key: std_logic_vector(7 downto 0);
 
 begin
     data_encoder: rom port map(
@@ -43,7 +52,13 @@ begin
         dOut => rom_to_cipher
     );
 
+    --key_generator: key_rom port map(
+        --dOut => key,
+        --clk => clk
+    --);
+
     key_encoder: rom port map(
+        --dIn => key,
         dIn => keyIn,
         dOut => keyrom_to_cipher
     );

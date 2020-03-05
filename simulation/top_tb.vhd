@@ -43,6 +43,8 @@ begin
 
     sim: process 
     begin
+        clr <= '0';
+        
         data_in <= "01101101"; -- M
         key_in <= "01101010"; -- J
         wait for clock_time;
