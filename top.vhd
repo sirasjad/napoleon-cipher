@@ -19,9 +19,7 @@ architecture arch of top is
         Port(
             dataIn: in std_logic_vector(7 downto 0); -- Data input (plaintext)
             keyIn: in std_logic_vector(7 downto 0); -- Key input
-            dataOut: out std_logic_vector(7 downto 0); -- Data output (ciphertext)
-            clk: in std_logic; -- Internal clock
-            clr: in std_logic -- Clear
+            dataOut: out std_logic_vector(7 downto 0) -- Data output (ciphertext)
         );
     end component;
 
@@ -66,9 +64,7 @@ begin
     cipher: encryption port map(
         dataIn => rom_to_cipher,
         keyIn => keyrom_to_cipher,
-        dataOut => cipher_to_rom,
-        clk => clk,
-        clr => clr
+        dataOut => cipher_to_rom
     );
 
     decoder: rom port map(

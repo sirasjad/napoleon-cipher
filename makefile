@@ -5,7 +5,7 @@ all:
 	@ghdl -a top.vhd 			simulation/top_tb.vhd
 	@ghdl -e rom_tb
 	@ghdl -e key_rom_tb
-	@ghdl -e encryption_tb
+	#@ghdl -e encryption_tb
 	@ghdl -e top_tb
 
 quick:
@@ -14,7 +14,7 @@ quick:
 sim:
 	@./rom_tb --vcd=simulation/wavefiles/rom_tb.vcd --stop-time=100ns
 	@./key_rom_tb --vcd=simulation/wavefiles/key_rom_tb.vcd --stop-time=100ns
-	@./encryption_tb --vcd=simulation/wavefiles/encryption_tb.vcd --stop-time=100ns
+	#@./encryption_tb --vcd=simulation/wavefiles/encryption_tb.vcd --stop-time=100ns
 	@./top_tb --vcd=simulation/wavefiles/top_tb.vcd --stop-time=300ns
 
 clean:
